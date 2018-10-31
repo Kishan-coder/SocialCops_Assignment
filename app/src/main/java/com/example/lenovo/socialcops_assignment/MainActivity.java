@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.MediaController;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
 
@@ -30,6 +31,7 @@ import java.net.URLConnection;
 
 public class MainActivity extends AppCompatActivity {
 
+    TextView textView;
     public static final String video_url="https://socialcops.com/images/old/spec/home/header-img-background_video-1920-480.mp4";
     VideoView videoView;
     Button btn;
@@ -47,6 +49,8 @@ public class MainActivity extends AppCompatActivity {
     public void playvideo(View view) {
         videoView = (VideoView) findViewById(R.id.videoView);
         String file_name=initializePlayer();
+        textView=(TextView)findViewById(R.id.textView);
+        textView.setText(file_name);
             if(new File(getFilesDir(), file_name).exists()){
               File file=new File(getFilesDir(), file_name);
               file.setReadable(true, false);

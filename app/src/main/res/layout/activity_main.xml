@@ -33,4 +33,13 @@
         android:text="PLAY"
         tools:layout_editor_absoluteX="148dp"
         tools:layout_editor_absoluteY="320dp" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="297dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="28dp"
+        android:text="VIDEONAME" />
 </RelativeLayout>
