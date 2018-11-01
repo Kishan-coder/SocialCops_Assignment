@@ -44,6 +44,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         btn = (Button) findViewById(R.id.button);
         media = new MediaController(this);
+        videoView.setMediaController(media);
+        media.setAnchorView(videoView);
+        videoView.requestFocus();
     }
 
     public void playvideo(View view) {
@@ -51,25 +54,26 @@ public class MainActivity extends AppCompatActivity {
         String file_name=initializePlayer();
         textView=(TextView)findViewById(R.id.textView);
         textView.setText(file_name);
-            if(new File(getFilesDir(), file_name).exists()){
+        if(new File(getFilesDir(), file_name).exists()){
               File file=new File(getFilesDir(), file_name);
               file.setReadable(true, false);
                 Uri videoUri = Uri.parse(file.getAbsolutePath());
                     videoView.setVideoURI(videoUri);
+
                     videoView.start();
                     Toast.makeText(this, "Playing offline video.", Toast.LENGTH_SHORT).show();
 
             }
-        if(!isNetworkAvailable()){
+        else if(!isNetworkAvailable()){
                 Toast.makeText(this, "Not connected!", Toast.LENGTH_SHORT).show();
             }
 
 
-
-        videoView.start();
-
-        DownLoadTask downLoadTask=new DownLoadTask();
-        downLoadTask.execute(video_url,file_name);
+        else {
+            videoView.start();
+            DownLoadTask downLoadTask = new DownLoadTask();
+            downLoadTask.execute(video_url, file_name);
+        }
     }
     private Uri getMedia(String mediaName) {
         return Uri.parse(mediaName);
